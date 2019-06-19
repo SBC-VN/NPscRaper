@@ -1,0 +1,12 @@
+<div class="container is-fluid" id="article-header">
+  <row class="article-row">
+    <H1>All the NPR articles that the best scraping can buy!</H1>
+  </row>
+  <div id="item-container">
+    {{#each dbItems}}
+    {{> item/item-block}}
+    {{/each}}
+  </div>
+</div>
+
+{{> modal/comment-modal}}

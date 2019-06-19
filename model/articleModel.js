@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Define a schema to store portfolio information.
-const articleModel = new Schema({
+const ArticleModel = new Schema({
     articleId: {
         type: String,
         trim: true,
@@ -26,7 +26,7 @@ const articleModel = new Schema({
       },
 });
 
-const articleModel = mongoose.model("articleModel", articleModel);
+const articleModel = mongoose.model("ArticleModel", ArticleModel);
 
 // Export the model
 module.exports = articleModel;

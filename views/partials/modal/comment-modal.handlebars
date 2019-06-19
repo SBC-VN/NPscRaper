@@ -1,0 +1,25 @@
+<div class="modal" id="contact-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Enter your comment</p>
+      <button class="delete" id="modal-close-x" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+
+        {{!-- Start of the modal's form --}}
+        <div class="field">
+        <label class="label">Notes</label>
+        <div class="control">
+            <textarea class="textarea" id="modal-text-field"  placeholder="Textarea"></textarea>
+        </div>
+        </div>
+        
+         {{!-- End of the modal's form --}}
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" id="modal-submit">Submit</button>
+      <button class="button" id="model-cancel">Cancel</button>
+    </footer>
+  </div>
+</div>
