@@ -1,13 +1,16 @@
-<div class="modal" id="contact-modal">
+<div class="modal" id="comment-modal">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
       <p class="modal-card-title">Enter your comment</p>
+      <span id="modal-article-id" style="display:none"></span>
+      <span id="modal-comment-id" style="display:none"></span>
       <button class="delete" id="modal-close-x" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
 
         {{!-- Start of the modal's form --}}
+        <p id="modal-article-title"></p>
         <div class="field">
         <label class="label">Notes</label>
         <div class="control">

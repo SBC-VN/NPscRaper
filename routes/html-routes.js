@@ -2,7 +2,7 @@
 // =============================================================
 const path = require("path");
 const mongoose = require("mongoose");
-const articleItems = require("../model/articleModel.js");
+const db = require("../model/dbModel.js");
 
 // Routes
 // =============================================================
@@ -11,10 +11,11 @@ module.exports = function(app) {
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
   app.get("/", function(req, res) {
-    articleItems.find({}).sort({articleId:1})
-                            .then(function(dbItems) {
-                              res.render("display", {dbItems});
-                            });
+    db.Articles.find({}).sort({articleId:1})
+                        .populate("comments")
+                        .then(function(dbItems) {
+                          res.render("display", {dbItems});
+                        })
   });
   
 

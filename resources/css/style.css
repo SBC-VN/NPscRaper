@@ -8,21 +8,34 @@ html {
 body {
     height: 100%;
     width: 100%;
+    background-color: lightgrey;
 }
 
-#main-section{
-    height: 100%;
-    width: 100%;
-    padding-top: 8%;
-    padding-right: 2%;
+.v-article-row {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding-bottom: 1%;
+    border-color: darkgreen;
+    border-style: solid;
 }
 
-#main-container{
-    height: 100%;
-    width: 100%;
+.v-text-container {
+    overflow: auto;
+    height: 300px;
+    color: black;
 }
 
-#item-container {
-    overflow: scroll;
-    height: 100%;
+.v-edit-icon {
+    height: 10%;
+    width: 10%;
+    float: top;
+}
+
+.v-comment-row {
+    border-color: lightblue;
+    border-style: solid;
+}
+
+.v-comment-text {
+    display: inline;
 }

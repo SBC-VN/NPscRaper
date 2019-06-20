@@ -1,14 +1,31 @@
-<row class="article-row">
+<div class="v-article-row" id="v-article-row-{{articleId}}">    
+    <a href="{{href}}" alt="Link to article"> <strong id="v-article-row-{{articleId}}-title">{{title}}</strong></a>
+
     <div class="columns">
         <div class="column">
-        <strong>{{title}}</strong>
-        <a href="{{href}}" alt="Link to article">
+            <figure class="image">
+                <img src="{{image}}">
+            </figure>
+        </div>
+        <div class="column is-three-fifths">
+            <div class="v-text-container v-article-text">
+            {{text}}
+            </div>
         </div>
         <div class="column">
-        {{text}}
-        </div>
-        <div class="column">
-        {{comment}}
+            <div class="v-text-container v-comment-block">
+                <img class="v-edit-icon" data-articleId={{articleId}} src="/resources/img/edit-icon.svg">
+                {{#if hasComment}}
+                    {{#each comments}}
+                        <div class="v-comment-row">
+                            <a class="delete is-small delete-comment" data-comment-id={{_id}}></a>
+                            <div class="v-comment-text" data-comment-id={{_id}} data-article-id={{articleId}}>    
+                                {{comment}}                            
+                            </div>
+                        </div>
+                    {{/each}}
+                {{/if}}
+            </div>
         </div>
     </div>
-</row>
+</div>
