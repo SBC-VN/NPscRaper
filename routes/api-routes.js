@@ -33,7 +33,7 @@ function checkArticle(article) {
                 });
             }
 
-function scrapeHeadlines(webPath) {
+function scrapeHeadlines(webPath, res) {
     axios.get(webPath).then(function(response) {
         let $ = cheerio.load(response.data);
         $('article').each(function(i, element) {
@@ -59,17 +59,16 @@ function scrapeHeadlines(webPath) {
                     }
                 }                
             }
-            // else {
-            //     console.log("No story anchors");
-            // }
         });
+
+        res.json({status : "ok"});
     });
 }
 
 // 
 // Function that adds a comment to an existing article.
 //
-function addComment(articleId, comment)
+function addComment(articleId, comment, res)
 {
     console.log("Add comment", articleId);
     db.Comments.create({articleId, comment})
@@ -88,22 +87,25 @@ function addComment(articleId, comment)
                             },
                             function(error, edited) {
                                 if (error) {
-                                    console.log("Update Article error " + articleId, error);
+                                    res.json( { articleId,
+                                                action : "Add",
+                                                status : "Error",
+                                                error });
                                 }
                                 else {
-                                    console.log("Updated",articleId);
+                                    res.json( { articleId,
+                                                action : "Add",
+                                                status : "ok" });
                                 };
                             }
             );
         });
-        // This will return before the update is complete.
-        return({status : "ok"});
     }          
     
 // 
 // Function that updates the text of an existing comment.
 //
-function updateComment(commentId, comment)
+function updateComment(commentId, comment, res)
 {
     console.log("Update comment", commentId);
     db.Comments.updateOne(  { _id : commentId },
@@ -112,53 +114,58 @@ function updateComment(commentId, comment)
                             },
                             function(error, edited) {
                                 if (error) {
-                                    console.log("Update Comment error " + commentId, error);
+                                    res.json( { commentId,
+                                                action : "Update",
+                                                status : "Error",
+                                                error });
                                 }
                                 else {
-                                    console.log("Updated",commentId);
+                                    res.json( { commentId,
+                                                action : "Update",
+                                                status : "ok" });
                                 };
                             }
             );
-        // This will return before the update is complete.
-        return({status : "ok"});
     }  
 
 // 
 // Function that updates the text of an existing comment.
 //
-function deleteComment(commentId)
+function deleteComment(commentId,res)
 {
     console.log("Delete comment", commentId);
     db.Comments.deleteOne(  { _id : commentId },
                          function(error, edited) {
                                 if (error) {
-                                    console.log("Remove Comment error " + commentId, error);
+                                    res.json( { commentId,
+                                                action : "Delete",
+                                                status : "Error",
+                                                error });
                                 }
                                 else {
-                                    console.log("Removed",commentId);
+                                    res.json( { commentId,
+                                                action : "Delete",
+                                                status : "ok" });
                                 };
                             }
             );
-        // This will return before the update is complete.
-        return({status : "ok"});
     }  
 
 module.exports = function(app) {
     // Start the scrape.
     app.post("/api/scrape", function(req, res) {
-        scrapeHeadlines("https://www.npr.org/");
-        res.json({status: "ok"});
+        scrapeHeadlines("https://www.npr.org/",res);
     });
 
     app.post("/api/comment/add/:articleId", function(req, res) {
-        res.json(addComment(req.params.articleId,req.body.comment));
+        addComment(req.params.articleId,req.body.comment,res);
     });
 
     app.post("/api/comment/update/:commentId", function(req, res) {
-        res.json(updateComment(req.params.commentId,req.body.comment));
+        updateComment(req.params.commentId,req.body.comment,res);
     });
 
     app.post("/api/comment/delete/:commentId", function(req, res) {
-        res.json(deleteComment(req.params.commentId));
+        deleteComment(req.params.commentId,res);
     });
   };

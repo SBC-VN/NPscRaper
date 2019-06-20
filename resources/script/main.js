@@ -24,6 +24,7 @@ $("#modal-submit").on("click",function(event) {
       data: { comment }
       }).then(function(data) {
         console.log("API comment submit response",data);
+        location.reload(true);
       });
   }
   else {
@@ -34,6 +35,7 @@ $("#modal-submit").on("click",function(event) {
         data: { comment }
         }).then(function(data) {
           console.log("API comment submit response",data);
+          location.reload(true);
         });
       }
 });
@@ -46,6 +48,7 @@ $( document ).ready(function() {
         data: {scrape : true} 
       }).then(function(data) {
         console.log("API scrape response",data);
+        //location.reload(true);
       });
 
       $(".v-edit-icon").on("click", function(event) {
@@ -80,6 +83,7 @@ $( document ).ready(function() {
           data: { id : commentId }
           }).then(function(data) {
             console.log("API comment delete response",data);
+            location.reload(true);
           });
         }
       );

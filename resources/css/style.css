@@ -11,6 +11,10 @@ body {
     background-color: lightgrey;
 }
 
+#main-title {
+    font-size: 150%;
+}
+
 .v-article-row {
     margin-top: 1%;
     margin-bottom: 1%;
